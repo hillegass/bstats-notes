@@ -80,7 +80,7 @@ The mode is
 
 \section*{Binomial Distribution}
 
-The binomia distribution is a discrete distribution that takes one parameter: $\pi$ is the probability of one success in one try. The probability of getting exactly $k$ successes in $n$ trials is given by
+The binomial distribution is a discrete distribution that takes one parameter: $\pi$ is the probability of one success in one try. The probability of getting exactly $k$ successes in $n$ trials is given by
 \begin{equation*}
 p(k) = \binom{n}{k}\pi^k(1-\pi)^{n-k}
 \end{equation*}
@@ -180,12 +180,12 @@ So how do you figure out what the $\beta$ is? You use the $n$ data points you ha
 
 Given the data you have, the sum of the squares of the errors for a vector $\beta$ is given by 
 \begin{equation*}
-y^T y - 2 \beta^T X^T y + \beta^T X^T X \beta
+\boldsymbol{y}^T \boldsymbol{y} - 2 \beta^T X^T \boldsymbol{y} + \beta^T X^T X \beta
 \end{equation*}
 
 To minimize that, you set $\beta$ to be:
 \begin{equation*}
-\beta = \left( X^T X \right)^{-1} X^T y
+\beta = \left( X^T X \right)^{-1} X^T \boldsymbol{y}
 \end{equation*}
 
 \end{document}
