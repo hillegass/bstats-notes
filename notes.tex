@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{bm}
+
+
+\newcommand{\R}{\mathbb{R}} 
+
+\begin{document}
+\title{Stuff I Should Know for Bayesian Statistics}
+\author{D. Aaron Hillegass \\hillegass@gatech.edu}
+\maketitle
+
+\section*{Normal Distribution}
+
+A normal distribution has two parameters: the mean ($\theta$) and the variance ($\sigma^2$). $x$ can go from $-\infty$ to $\infty$. Its density is given by
+\begin{equation*}
+p(x) \propto e^{-\frac{(x - \theta)^2}{2\sigma^2}}
+\end{equation*}
+
+For that to integrate to 1, the normalizing constant is
+\begin{equation*}
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\end{equation*}
+
+The conjugate prior of the mean of a normal distribution is another normal distribution. Specifically, if $x_1, \dots, x_n$, are identical and independent with a normal distribution $\mathcal{N}(\theta, \sigma^2)$ and the prior is $\theta \sim  N(\theta_0, \sigma_0^2)$,
+\begin{equation*}
+\theta | x_1,\ldots,x_n \sim \mathcal{N}\left( \frac{\frac{\sigma^2}{n}\theta_0 + \sigma_0^2\bar{x}}{\frac{\sigma^2}{n}+\sigma_0^2},\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1} \right)
+\end{equation*}
+
+The conjugate prior of the variance of a normal distribution is an inverse gamma distribution.
+
+\section*{Gamma Distribution}
+
+The gamma distribution has two parameters: $\alpha$ and $\beta$. $x$ can go from $0$ to $\infty$ Its density is given by
+\begin{equation*}
+p(x) \propto   x^{\alpha-1} e^{-\beta x} \quad \text{ for } x > 0 \text{ and } \alpha, \beta > 0,
+\end{equation*}
+
+For that to integrate to 1, the normalizing constant is
+\begin{equation*}
+\frac{ \beta^\alpha}{\Gamma(\alpha)}
+\end{equation*}
+
+The mean of the distribution is
+\begin{equation*}
+E[x] = \frac{ \alpha}{\beta}
+\end{equation*}
+
+If $\alpha \geq 1$, the mode is 
+\begin{equation*}
+\frac{ \alpha - 1}{\beta}
+\end{equation*}
+
+
+\section*{Inverse Gamma Distribution}
+
+An inverse gamma distribution has two parameters: $\alpha$ and $\beta$. $x$ can go from $0$ to $\infty$. Its density is given by
+\begin{equation*}
+p(x) \propto 
+(1/x)^{\alpha + 1}e^{\left(-\frac{\beta}{x}\right)}
+\end{equation*}
+
+For that to integrate to 1, the normalizing constant is
+\begin{equation*}
+\frac{\beta^\alpha}{\Gamma(\alpha)}
+\end{equation*}
+
+If $\alpha > 1$, the mean of the distribution is
+\begin{equation*}
+E[x] = \frac{ \beta}{\alpha - 1} 
+\end{equation*}
+
+The mode is 
+\begin{equation*}
+\frac{ \beta}{\alpha + 1}
+\end{equation*}
+
+\section*{Binomial Distribution}
+
+The binomia distribution is a discrete distribution that takes one parameter: $\pi$ is the probability of one success in one try. The probability of getting exactly $k$ successes in $n$ trials is given by
+\begin{equation*}
+p(k) = \binom{n}{k}\pi^k(1-\pi)^{n-k}
+\end{equation*}
+
+The mean is $n\pi$.
+
+Its conjugate prior of $\pi$ is the Beta distribution.
+
+\section*{Beta Distribution}
+
+The beta distribution takes two parameters: $\alpha$ and $\beta$. Its density is given by
+\begin{equation*}
+p(x) \propto  x^{\alpha-1}(1-x)^{\beta-1}
+\end{equation*}
+
+For that to integrate to 1, the normalizing constant is
+\begin{equation*}
+\frac{1}{Beta(\alpha,\beta)}
+\end{equation*}
+
+The mode is
+\begin{equation*}
+\frac{\alpha - 1} {\alpha + \beta - 2}
+\end{equation*}
+
+\section*{Poisson Distribution}
+
+The Poisson Distribution is a discrete distribution that takes one parameter: $\lambda$. Its distribution is given by
+\begin{equation*}
+p(x) = \frac{\lambda^x}{x!} \hspace{5mm}  x \in \lbrace 0, 1, \ldots\rbrace
+\end{equation*}
+
+To normalize it, the constant is
+\begin{equation*}
+e^{-\lambda}
+\end{equation*}
+
+$\lambda$ is both its mean and its variance.
+
+The congugate prior for $\lambda$ is the gamma distribution
+
+\section*{Pareto Distribution}
+
+The Type 1 Pareto Distribution has two parameters $\alpha$ and $x_\mathrm{m}$, where $x_\mathrm{m}$ is the minimum possible value.  Both  $x_\mathrm{m}$ and $\alpha$ must be positive. Its density is
+\begin{equation*}
+p(x)= \begin{cases} \frac{\alpha x_\mathrm{m}^\alpha}{x^{\alpha+1}} & x \ge x_\mathrm{m}, \\ 0 & x < x_\mathrm{m}. \end{cases}
+\end{equation*}
+
+The mean of the distribution is
+\begin{equation*}
+\operatorname{E}(X)= \begin{cases} \infty & \alpha\le 1, \\
+\frac{\alpha x_\mathrm{m}}{\alpha-1} & \alpha>1.
+\end{cases}
+\end{equation*}
+
+Its cumulative distribution function is
+\begin{equation*}
+F(x) = \begin{cases}
+1-\left(\frac{x_\mathrm{m}}{x}\right)^\alpha & x \ge x_\mathrm{m}, \\
+0 & x < x_\mathrm{m}.\end{cases}
+\end{equation*}
+
+\section*{Gamma Function}
+
+The gamma function is a generalization of factorial. That is, if $n$ is a positive integer
+\begin{equation*}
+\Gamma(n) = (n-1)!
+\end{equation*}
+But the gamma function is defined:
+\begin{equation*}
+\Gamma(z) = \int_0^\infty x^{z-1} e^{-x}\,dx
+\end{equation*}
+
+\section*{Beta Function}
+
+The beta function is 
+\begin{equation*}
+Beta(x,y) = \int_0^1t^{x-1}(1-t)^{y-1}\,dt = \frac{\Gamma(x)\,\Gamma(y)}{\Gamma(x+y)}
+\end{equation*}
+
+\section*{Choose Function}
+
+The choose function is:
+\begin{equation*}
+\binom{n}{k} = \frac{n!}{k! (n-k)!}
+\end{equation*}
+
+
+\section*{Linear Regression}
+
+If you are trying to use $p$ inputs ($x_1, \ldots, x_p$) to predict an ouput $y$, you could create a vector of coefficients $(\beta_0, \ldots, \beta_n)$ such that
+\begin{equation*}
+y \approx \beta_0 + \beta_1 x_1 + \ldots + \beta_p x_p
+\end{equation*}
+
+So how do you figure out what the $\beta$ is? You use the $n$ data points you have: The column vector $\boldsymbol{y} = (y_1, y_2, \ldots, y_n)'$ is the outcomes. The matrix $\boldsymbol{X}$ is the inputs.  Row $i$ of $\boldsymbol{X}$ starts with 1 and has the inputs $(x_{i,1}, x_{i,2},\ldots,x_{i, p})$ that correspond to $y_i$. Thus $X$ has $n$ rows and $p+1$ columns.
+
+Given the data you have, the sum of the squares of the errors for a vector $\beta$ is given by 
+\begin{equation*}
+y^T y - 2 \beta^T X^T y + \beta^T X^T X \beta
+\end{equation*}
+
+To minimize that, you set $\beta$ to be:
+\begin{equation*}
+\beta = \left( X^T X \right)^{-1} X^T y
+\end{equation*}
+
+\end{document}
