@@ -178,14 +178,14 @@ y \approx \beta_0 + \beta_1 x_1 + \ldots + \beta_p x_p
 
 So how do you figure out what the $\beta$ is? You use the $n$ data points you have: The column vector $\boldsymbol{y} = (y_1, y_2, \ldots, y_n)'$ is the outcomes. The matrix $\boldsymbol{X}$ is the inputs.  Row $i$ of $\boldsymbol{X}$ starts with 1 and has the inputs $(x_{i,1}, x_{i,2},\ldots,x_{i, p})$ that correspond to $y_i$. Thus $X$ has $n$ rows and $p+1$ columns.
 
-Given the data you have, the sum of the squares of the errors for a vector $\beta$ is given by 
+Given the data you have, the sum of the squares of the errors for a column vector $\beta$ (of length $p + 1$) is given by 
 \begin{equation*}
-\boldsymbol{y}^T \boldsymbol{y} - 2 \beta^T X^T \boldsymbol{y} + \beta^T X^T X \beta
+\boldsymbol{y}^T \boldsymbol{y} - 2 \beta^T \boldsymbol{X}^T \boldsymbol{y} + \beta^T \boldsymbol{X}^T \boldsymbol{X} \beta
 \end{equation*}
 
 To minimize that, you set $\beta$ to be:
 \begin{equation*}
-\beta = \left( X^T X \right)^{-1} X^T \boldsymbol{y}
+\beta = \left( \boldsymbol{X}^T \boldsymbol{X} \right)^{-1} \boldsymbol{X}^T \boldsymbol{y}
 \end{equation*}
 
 \end{document}
