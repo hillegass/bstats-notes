@@ -87,7 +87,7 @@ p(k) = \binom{n}{k}\pi^k(1-\pi)^{n-k}
 
 The mean is $n\pi$.
 
-Its conjugate prior of $\pi$ is the Beta distribution.
+The conjugate prior of $\pi$ is the Beta distribution.
 
 \section*{Beta Distribution}
 
@@ -186,6 +186,28 @@ Given the data you have, the sum of the squares of the errors for a column vecto
 To minimize that, you set $\beta$ to be:
 \begin{equation*}
 \beta = \left( \boldsymbol{X}^T \boldsymbol{X} \right)^{-1} \boldsymbol{X}^T \boldsymbol{y}
+\end{equation*}
+
+\section*{Logarithmic Identities}
+
+\begin{equation*}
+\log{\left( e^x \right)} = x \hspace{10mm} e^{\log{x}} = x
+\end{equation*}
+
+\begin{equation*}
+\log{\left(  ab \right)} = \log a + \log b \hspace{10mm}  \log{\left(\frac{a}{b} \right)} = \log a - \log b
+\end{equation*}
+
+\begin{equation*}
+\log{\left(  a^b \right)} = b\log a \hspace{10mm}  \log{\left(\sqrt[b]{a} \right)} = \frac{\log{a}}{b}
+\end{equation*}
+
+\begin{equation*}
+a^{\log{b}} = b^{\log{a}}  \hspace{10mm}  x^{\frac{\log(a)}{\log(x)}} = a
+\end{equation*}
+
+\begin{equation*}
+{d \over dx} \log x = {1 \over x } \hspace{10mm} \log x = \int_1^x \frac {1}{t} dt
 \end{equation*}
 
 \end{document}
