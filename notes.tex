@@ -25,7 +25,7 @@ For that to integrate to 1, the normalizing constant is
 \frac{1}{\sqrt{2\pi\sigma^2}}
 \end{equation*}
 
-The conjugate prior of the mean of a normal distribution is another normal distribution. Specifically, if $x_1, \dots, x_n$, are identical and independent with a normal distribution $\mathcal{N}(\theta, \sigma^2)$ and the prior is $\theta \sim  N(\theta_0, \sigma_0^2)$,
+The conjugate prior of the mean of a normal distribution is another normal distribution. Specifically, if $x_1, \dots, x_n$, are identical and independent with a normal distribution $\mathcal{N}(\theta, \sigma^2)$ and the prior is $\theta \sim  \mathcal{N}(\theta_0, \sigma_0^2)$,
 \begin{equation*}
 \theta | x_1,\ldots,x_n \sim \mathcal{N}\left( \frac{\frac{\sigma^2}{n}\theta_0 + \sigma_0^2\bar{x}}{\frac{\sigma^2}{n}+\sigma_0^2},\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1} \right)
 \end{equation*}
@@ -105,6 +105,29 @@ The mode is
 \begin{equation*}
 \frac{\alpha - 1} {\alpha + \beta - 2}
 \end{equation*}
+
+\section*{Exponential Distribution}
+
+The exponential distribution takes one parameter $\lambda$. Its probability density is
+\begin{equation*}
+p(x) = \begin{cases}
+\lambda e^{-\lambda x} & x \ge 0, \\
+0 & x < 0.
+\end{cases}
+\end{equation*}
+Note that this is a special case of the gamma distribution.
+
+Its cumulative distribution function is
+\begin{equation*}
+F(x) = \begin{cases}
+1-e^{-\lambda x} & x \ge 0, \\
+0 & x < 0.
+\end{cases}
+\end{equation*}
+
+Its mean is $\frac{1}{\lambda}$. Its median is $\frac{\log{2}}{\lambda}$. Its mode is 0. Its variance is $\frac{1}{\lambda^2}$.
+
+The conjugate prior for $\lambda$ in the exponential distribution is a gamma distribution.
 
 \section*{Poisson Distribution}
 
