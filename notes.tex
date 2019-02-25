@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{bm}
 
-
+\DeclareMathOperator*{\E}{\mathbb{E}}
 \newcommand{\R}{\mathbb{R}} 
 
 \begin{document}
@@ -17,13 +17,9 @@
 
 A normal distribution has two parameters: the mean ($\theta$) and the variance ($\sigma^2$). $x$ can go from $-\infty$ to $\infty$. Its density is given by
 \begin{equation*}
-p(x) \propto e^{-\frac{(x - \theta)^2}{2\sigma^2}}
+p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \theta)^2}{2\sigma^2}}
 \end{equation*}
 
-For that to integrate to 1, the normalizing constant is
-\begin{equation*}
-\frac{1}{\sqrt{2\pi\sigma^2}}
-\end{equation*}
 
 The conjugate prior of the mean of a normal distribution is another normal distribution. Specifically, if $x_1, \dots, x_n$, are identical and independent with a normal distribution $\mathcal{N}(\theta, \sigma^2)$ and the prior is $\theta \sim  \mathcal{N}(\theta_0, \sigma_0^2)$,
 \begin{equation*}
@@ -36,13 +32,9 @@ The conjugate prior of the variance of a normal distribution is an inverse gamma
 
 The gamma distribution has two parameters: $\alpha$ and $\beta$. $x$ can go from $0$ to $\infty$ Its density is given by
 \begin{equation*}
-p(x) \propto   x^{\alpha-1} e^{-\beta x} \quad \text{ for } x > 0 \text{ and } \alpha, \beta > 0,
+p(x) =   \frac{ \beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x} \quad \text{ for } x > 0 \text{ and } \alpha, \beta > 0,
 \end{equation*}
 
-For that to integrate to 1, the normalizing constant is
-\begin{equation*}
-\frac{ \beta^\alpha}{\Gamma(\alpha)}
-\end{equation*}
 
 The mean of the distribution is
 \begin{equation*}
@@ -59,13 +51,8 @@ If $\alpha \geq 1$, the mode is
 
 An inverse gamma distribution has two parameters: $\alpha$ and $\beta$. $x$ can go from $0$ to $\infty$. Its density is given by
 \begin{equation*}
-p(x) \propto 
-(1/x)^{\alpha + 1}e^{\left(-\frac{\beta}{x}\right)}
-\end{equation*}
-
-For that to integrate to 1, the normalizing constant is
-\begin{equation*}
-\frac{\beta^\alpha}{\Gamma(\alpha)}
+p(x) =
+\frac{\beta^\alpha}{\Gamma(\alpha)}(1/x)^{\alpha + 1}e^{\left(-\frac{\beta}{x}\right)}
 \end{equation*}
 
 If $\alpha > 1$, the mean of the distribution is
@@ -93,17 +80,31 @@ The conjugate prior of $\pi$ is the Beta distribution.
 
 The beta distribution takes two parameters: $\alpha$ and $\beta$. Its density is given by
 \begin{equation*}
-p(x) \propto  x^{\alpha-1}(1-x)^{\beta-1}
-\end{equation*}
-
-For that to integrate to 1, the normalizing constant is
-\begin{equation*}
-\frac{1}{Beta(\alpha,\beta)}
+p(x) = \frac{1}{Beta(\alpha,\beta)} x^{\alpha-1}(1-x)^{\beta-1}
 \end{equation*}
 
 The mode is
 \begin{equation*}
 \frac{\alpha - 1} {\alpha + \beta - 2}
+\end{equation*}
+
+\section*{Negative Binomial Distribution}
+
+The negative binomial distribution is a discrete probability distribution that takes two parameters: $r$ and $p$. For any $k \in 0, 1,2,\ldots$,
+\begin{equation*}
+p(k) = \binom{k+r-1}{k} (1-p)^r p^k 
+\end{equation*}
+
+The mean is
+\begin{equation*}
+\E \left( p(k) \right) = \frac{pr}{1-p}
+\end{equation*}
+
+If $r \leq 1$, the mode is 0. Otherwise it is $\lfloor \frac{p(r - 1)}{1 - p} \rfloor$
+
+The variance is
+\begin{equation*}
+\frac{pr}{(1-p)^2}
 \end{equation*}
 
 \section*{Exponential Distribution}
@@ -133,13 +134,9 @@ The conjugate prior for $\lambda$ in the exponential distribution is a gamma dis
 
 The Poisson Distribution is a discrete distribution that takes one parameter: $\lambda$. Its distribution is given by
 \begin{equation*}
-p(x) = \frac{\lambda^x}{x!} \hspace{5mm}  x \in \lbrace 0, 1, \ldots\rbrace
+p(x) = \frac{\lambda^x  e^{-\lambda}}{x!} \hspace{5mm}  x \in \lbrace 0, 1, \ldots\rbrace
 \end{equation*}
 
-To normalize it, the constant is
-\begin{equation*}
-e^{-\lambda}
-\end{equation*}
 
 $\lambda$ is both its mean and its variance.
 
@@ -232,5 +229,33 @@ a^{\log{b}} = b^{\log{a}}  \hspace{10mm}  x^{\frac{\log(a)}{\log(x)}} = a
 \begin{equation*}
 {d \over dx} \log x = {1 \over x } \hspace{10mm} \log x = \int_1^x \frac {1}{t} dt
 \end{equation*}
+
+\section*{Stuff Bayesians Like To Calculate}
+
+\begin{equation*}
+p(\theta | y) 
+=  \frac{p(y | \theta) p(\theta)}{p(y)} 
+=  \frac{p(y | \theta) p(\theta)}{\int p(y | \theta)p(\theta)d\theta} 
+\end{equation*}
+
+\begin{equation*}
+\E (\theta | y) =  \int \theta\ p(\theta| y)d\theta = \frac{\int \theta\ p(y|\theta)p(\theta)d\theta}{\int p(y|\theta)p(\theta)d\theta}
+\end{equation*}
+
+\begin{equation*}
+var (\theta | y) = \E (\theta^2 | y) - \left(\E(\theta | y)\right)^2
+\end{equation*}
+
+\begin{equation*}
+p(\theta \in A \ | \ y) = \int_{A} p(\theta | y)d\theta
+\end{equation*}
+
+The posterior predictive distribution:
+\begin{equation*}
+p(y \ | \ data) = \int p(y\ |\ \theta) p(\theta\ |\ data) d\theta
+\end{equation*}
+
+
+
 
 \end{document}
